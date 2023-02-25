@@ -6,8 +6,7 @@ import seaborn as sns
 from sklearn.model_selection import train_test_split
 from imblearn.under_sampling import RandomUnderSampler
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import f1_score, recall_score, precision_score
+from sklearn.metrics import accuracy_score, f1_score, recall_score, precision_score, roc_auc_score
 
 # read datasets from given .csv files
 df_train = pd.read_csv("af2_dataset_training_labeled.csv")
@@ -71,15 +70,17 @@ X_train, X_test, y_train, y_test = train_test_split(X_under, y_under, test_size=
 clf = LogisticRegression(max_iter=10000)
 clf = clf.fit(X_train, y_train)
 preds = clf.predict(X_test)
-accuracy_score(y_test, preds)
+print(accuracy_score(y_test, preds))
 
 # calculate and print F1 score
 f1 = f1_score(y_test, preds)
 recall = recall_score(y_test, preds)
 precision = precision_score(y_test, preds)
+roc_auc = accuracy_score(y_test, preds)
 print('F1 score:', f1)
 print('recall: ', recall)
 print('precision: ', precision)
+print("ROC AUC score:", roc_auc)
 
 # run testing set through the trained model to calculate predictions
 submission_preds = clf.predict(df_test)
