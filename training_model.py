@@ -87,7 +87,7 @@ submission_preds = clf.predict(df_test)
 
 result = pd.DataFrame({
     'id': test_ids,
-    'predictions': submission_preds
+    'Predicted': submission_preds
 })
 
 # write results to .csv file
